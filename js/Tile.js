@@ -23,6 +23,8 @@ Game.Tile = function (myX, myY, myType) {
     //
     
     my.tryToStepOn = function () {
+    
+       
         if (my.type === "ufoExit") {
             Game.levelIsWon = true;
             Game.update();

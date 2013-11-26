@@ -34,7 +34,8 @@ Game.move = function (dirX, dirY) {
     'use strict';
     var testX = Game.hero.posX + dirX,
         testY = Game.hero.posY + dirY,
-        tileToTest;
+        tileToTest,
+        ttype;
     
     // find out if the projected position is 'inside' the world
     if (Game.tiles.inside(testX, testY) === false) {
@@ -42,8 +43,15 @@ Game.move = function (dirX, dirY) {
     }
     
     // get the tile we are about to walk on
-    tileToTest = Game.tiles.get(testX, testY);
+    	tileToTest = Game.tiles.get(testX, testY);
+        ttype = tileToTest.type; //get its type
     //
+    	if (ttype === 1) {
+    		return false;
+    	} else if (ttype === 4) { //this is a cow
+    		tileToTest.changeTo(0); // key becomes ground
+    	}
+    
     if (tileToTest.tryToStepOn()) {
         Game.hero.moveTo(testX, testY, true);
     }

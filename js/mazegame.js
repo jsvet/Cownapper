@@ -9,10 +9,11 @@ var Game = {
         "wall" : "img/wall.png",
         "hero" : "img/alien.png",
         "cow" : "img/cow.png",
-        "ufoExit" : "img/laserbeam.png"
+        "ufoExit" : "img/laserbeam.png",
+        "farmer" : "img/farmer.png"
     },
     // to avoid redundancy, we refer to property identifiers in imgResSrcs here
-    tileSrcs : ["ground", "field", "wall", "hero", "cow", "ufoExit"],
+    tileSrcs : ["ground", "field", "wall", "hero", "cow", "ufoExit", "farmer"],
     levelIsWon : false,
     offsetX : 10,
     offsetY : 10,
