@@ -10,10 +10,16 @@ var Game = {
         "hero" : "img/alien.png",
         "cow" : "img/cow.png",
         "ufoExit" : "img/laserbeam.png",
-        "farmer" : "img/farmer.png"
+        "farmer" : "img/farmer.png",
+        "corner" : "img/corner.png"
     },
     // to avoid redundancy, we refer to property identifiers in imgResSrcs here
     tileSrcs : ["ground", "field", "wall", "hero", "cow", "ufoExit", "farmer"],
+    tileKeys : {
+    	"W" : "wall",
+    	"G" : "ground",
+    	"C" : "corner"	
+    },
     levelIsWon : false,
     offsetX : 10,
     offsetY : 10,
@@ -38,7 +44,7 @@ Game.initModel = function () {
     'use strict';
     var theMap = Game.Grid(Game.levels.getMap()), // make a wrapped grid of tile codes
         tiles = [], // will be used to create a grid object containing all the tiles
-        type, tile;
+        type, tile, tname, tBitmap, tkey, tRotation, tCanRotate;
     //
     //reset clicks to 0 at the beginning of each level
     Game.clicks = 0;
@@ -53,6 +59,7 @@ Game.initModel = function () {
             tiles.push([]); // make a new column
         }
         //
+        /*
         if (tileCode === 3) { // special case for hero
             Game.hero = new Game.Hero(col, row);
             tileCode = 0;
@@ -60,15 +67,35 @@ Game.initModel = function () {
             Game.cows.push( new Game.Cow(col, row ));
             tileCode = 0;
         }
+        */
         /* else if (tileCode === 5) { // special case for ufo
             tileCode = 0; do this after ufo works like hero and cow
         } */
-        type = Game.tileSrcs[tileCode]; // look up the tile name
+        
+        if (typeof tileCode === "string") {    	
+        	tkey = tileCode.charAt(0);
+        	if (tkey === "0") { // hero
+        		Game.hero = new Game.Hero(col, row);
+        		tkey = "G";
+        	}
+        	tname = Game.tileKeys[tkey];
+        	type = tname; //Game.imgResSrcs[tname];
+        	
+        	if (tileCode.length > 1) {
+        		tRotation = parseInt(tileCode.charAt(1),10);
+        		tCanRotate = tileCode.charAt(1);
+        	}
+        	
+        } else {
+	        type = Game.tileSrcs[tileCode]; // look up the tile name
+        }
+        
         // now make the tile
-        tile = new Game.Tile(col, row, type);
+        tile = new Game.CowTile(col, row, type, tRotation, tCanRotate);
         // store the tile in our 2d array of tiles and add it to the stage
         tiles[row][col] = tile;
         Game.stage.addChild(tile);
+        //Game.stage.update();
     });
     
     Game.tiles = Game.Grid(tiles); // wrap the tiles array up as a 'grid' object

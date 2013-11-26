@@ -34,6 +34,7 @@ Game.move = function (dirX, dirY) {
     'use strict';
     var testX = Game.hero.posX + dirX,
         testY = Game.hero.posY + dirY,
+        currentTile =  Game.tiles.get(Game.hero.posX, Game.hero.posY),
         tileToTest,
         ttype;
     
@@ -41,9 +42,17 @@ Game.move = function (dirX, dirY) {
     if (Game.tiles.inside(testX, testY) === false) {
         return;
     }
-    
+    if (currentTile.canIexit(dirX, dirY) === false) {
+    	return;
+    }
     // get the tile we are about to walk on
-    	tileToTest = Game.tiles.get(testX, testY);
+    tileToTest = Game.tiles.get(testX, testY);
+    	
+    if (tileToTest.canIenter(dirX, dirY) === false) {
+    	return;
+    }
+    	
+    	
         ttype = tileToTest.type; //get its type
     //
     	if (ttype === 1) {
