@@ -1,0 +1,17 @@
+html {
+	font-family:Helvetica, sans-serif;
+	width:520px;
+	margin:auto;
+	background-color: lightblue;
+}
+#game {
+	width:510px;
+	margin:auto;
+}
+#stage{
+    /*background-color: #006699;*/
+	margin:auto;
+}
+footer {
+	font-size:80%;
+}
