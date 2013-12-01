@@ -36,7 +36,8 @@ Game.Tile = function (myX, myY, myType) {
     return my;    
     //
 };  
-Game.CowTile = function (myX, myY, myType, tRotation, tCanRotate) {
+
+Game.MazeTile = function (myX, myY, myType, tRotation, tCanRotate) {
 	var my = Game.Tile(myX, myY, myType),
 		wallArray = {
 			"wall" : [1,0,0,0],
@@ -45,26 +46,40 @@ Game.CowTile = function (myX, myY, myType, tRotation, tCanRotate) {
 			"field" : [1,1,1,1],
 			"ground" : [0,0,0,0]
 		}[myType],
-		i, wallCode, rot = 0;
+		i, 
+		wallCode, 
+		rot = 0;
+	
 	my.regX = Game.gridSize / 2;
 	my.regY = Game.gridSize / 2;
 	//
     my.x = my.posX * Game.gridSize + Game.offsetX + my.regX;
     my.y = my.posY * Game.gridSize + Game.offsetY + my.regY;
 	//
-	for (i=0; i<tRotation; i+=1) {
+	
+	var rotate = function () {		
+		my.rotation = (my.rotation + 90) % 360;
+		//Rotate walls 
 		wallCode = wallArray.pop();
 		wallArray.unshift(wallCode);
-	}
-	my.rotation = 90 * tRotation;
-	
-	console.log(wallArray);
-	//console.log(myType + ", " + tRotation + ", " + my.rotation);
-	
-	my.rotate = function () {
-		tRotation += 1;
-		my.rotation = 90 * tRotation;
 	};
+	
+	my.rotateOnLeave = function () {
+		window.setTimeout(function(){
+        	if(tCanRotate === "R"){
+			rotate();
+		}
+        },300);
+		
+		
+	};
+	
+	//Rotate the tile tRotation times.
+	for(i = 0; i<tRotation;i+=1)
+	{
+		rotate();
+	}
+	
 	my.canIenter = function (dirX, dirY) {
 		if (dirX === 1) {
 			return wallArray[3] === 0;

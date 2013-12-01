@@ -2,12 +2,13 @@
 Game.Hero = function (myX, myY) {
     'use strict';
     var my = new createjs.Bitmap("img/alien.png"),
-    startX = myX,
-    startY = myY;
+    	startX = myX,
+    	startY = myY;
+    
     my.moveTo = function (newX, newY, tween) {
         var newXpx, newYpx;
-        my.posX = newX;
-        my.posY = newY;
+        	my.posX = newX;
+        	my.posY = newY;
         //
         if (tween) {
             // find out where we want to go, then start tweening
@@ -42,24 +43,19 @@ Game.move = function (dirX, dirY) {
     if (Game.tiles.inside(testX, testY) === false) {
         return;
     }
+    
+    // Check current tile walls
     if (currentTile.canIexit(dirX, dirY) === false) {
     	return;
     }
-    // get the tile we are about to walk on
-    tileToTest = Game.tiles.get(testX, testY);
-    	
+    
+    // check the walls of the tile we are about to walk on
+    tileToTest = Game.tiles.get(testX, testY);	
     if (tileToTest.canIenter(dirX, dirY) === false) {
     	return;
     }
-    	
-    	
-        ttype = tileToTest.type; //get its type
-    //
-    	if (ttype === 1) {
-    		return false;
-    	} else if (ttype === 4) { //this is a cow
-    		tileToTest.changeTo(0); // key becomes ground
-    	}
+    
+	currentTile.rotateOnLeave();
     
     if (tileToTest.tryToStepOn()) {
         Game.hero.moveTo(testX, testY, true);

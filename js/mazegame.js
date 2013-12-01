@@ -7,7 +7,6 @@ var Game = {
         "ground": "img/ground.png",
         "field" : "img/field.png",
         "wall" : "img/wall.png",
-        "hero" : "img/alien.png",
         "cow" : "img/cow.png",
         "ufoExit" : "img/laserbeam.png",
         "farmer" : "img/farmer.png",
@@ -17,8 +16,11 @@ var Game = {
     tileSrcs : ["ground", "field", "wall", "hero", "cow", "ufoExit", "farmer"],
     tileKeys : {
     	"W" : "wall",
-    	"G" : "ground",
-    	"C" : "corner"	
+    	"C" : "corner",
+    	"H" : "hall",
+    	"F" : "field",
+      	"G" : "ground"
+	
     },
     levelIsWon : false,
     offsetX : 10,
@@ -48,8 +50,9 @@ Game.initModel = function () {
     //
     //reset clicks to 0 at the beginning of each level
     Game.clicks = 0;
-    
+   	
     Game.cows = [];
+    Game.ufos = [];
         
     //
     // convert 2d array of tile codes into a 2d array of tile objects...
@@ -77,13 +80,20 @@ Game.initModel = function () {
         	if (tkey === "0") { // hero
         		Game.hero = new Game.Hero(col, row);
         		tkey = "G";
+        	} else if (tkey === "1") { // cow
+        		Game.cows.push(new Game.Cow(col, row));
+        		tkey = "G";
+        	}else if (tkey === "2") { // UFO
+        		Game.ufos.push(new Game.UFO(col, row));
+        		tkey = "G";
         	}
+        	
         	tname = Game.tileKeys[tkey];
         	type = tname; //Game.imgResSrcs[tname];
         	
         	if (tileCode.length > 1) {
         		tRotation = parseInt(tileCode.charAt(1),10);
-        		tCanRotate = tileCode.charAt(1);
+        		tCanRotate = tileCode.charAt(2);
         	}
         	
         } else {
@@ -91,7 +101,7 @@ Game.initModel = function () {
         }
         
         // now make the tile
-        tile = new Game.CowTile(col, row, type, tRotation, tCanRotate);
+        tile = new Game.MazeTile(col, row, type, tRotation, tCanRotate);
         // store the tile in our 2d array of tiles and add it to the stage
         tiles[row][col] = tile;
         Game.stage.addChild(tile);
@@ -101,6 +111,7 @@ Game.initModel = function () {
     Game.tiles = Game.Grid(tiles); // wrap the tiles array up as a 'grid' object
     // finally, now that all tiles are drawn, add the hero on top
     Game.stage.addChild(Game.hero);
+	Game.addUFO();
     Game.addCows();
     
 };

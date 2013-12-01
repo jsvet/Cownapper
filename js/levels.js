@@ -24,8 +24,8 @@ Game.levels = [
         ],
         grid : [
 			["C0N","W0N","W0N","W0N","W0N","W0N","W0N","C1N"],
-			["W3N","0"  ,"W2R","W2R","W2R","W2R","W2R","C2N"],
-			["W3N","W2R","W2R","W2R","W2R","W2R","W2R","C2N"],
+			["W3N","0"  ,"1"  ,"W2R","W2R","W2R","W2R","C2N"],
+			["W3N","W2R","2","W2R","W2R","W2R","W2R","C2N"],
 			["W3N","W2R","W3R","W2R","W2R","W2R","W2R","C2N"],
 			["W3N","W2R","W3R","W2R","W2R","W2R","W2R","C2N"],
 			["C3N","W2N","W2N","W2N","W2N","W2N","W2N","C2N"],
