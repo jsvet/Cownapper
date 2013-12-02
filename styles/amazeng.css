@@ -1,8 +1,9 @@
 html {
-	font-family:Helvetica, sans-serif;
+	font-family: 'Gorditas';
+	color: white;
 	width:520px;
 	margin:auto;
-	background-color: lightgreen;
+	background-image:url('http://rosalienebacchus.files.wordpress.com/2012/04/planet-earth-from-space.jpg') ;
 }
 #game {
 	width:510px;

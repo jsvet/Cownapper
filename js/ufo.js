@@ -3,9 +3,10 @@ Game.UFO = function (myX, myY) {
     'use strict';
     var startX = myX,
     	startY = myY,
-    	my = new createjs.Bitmap("img/laserbeam.png");
+    	my = new createjs.Bitmap("img/UFO.png");
     //
     
+    // rewrite this one to animate UFO landing and taking off *********
     my.rock = function(){
     	createjs.Tween.get(my).to({rotation:20}, 200).call(function(){
     		createjs.Tween.get(my).to({rotation:0}, 200);

@@ -56,3 +56,14 @@ Game.cowAt = function (testX, testY){
 		}
 	}
 };
+
+Game.hasCow = function(){
+	var cowIndex, theCow;
+	for(cowIndex in Game.cows){
+		theCow = Game.cows[cowIndex];
+    	if(theCow.isAt(testX, testY)) {
+    		console.log("there's a cow here");
+    		//Game.boxes[boxIndex].removeChild(Game.Cow);
+    	}
+    }  
+};

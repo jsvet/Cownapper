@@ -109,7 +109,7 @@ Game.initModel = function () {
     });
     
     Game.tiles = Game.Grid(tiles); // wrap the tiles array up as a 'grid' object
-    // finally, now that all tiles are drawn, add the hero on top
+    // finally, now that all tiles are drawn, add the objects on top
     Game.stage.addChild(Game.hero);
 	Game.addUFO();
     Game.addCows();

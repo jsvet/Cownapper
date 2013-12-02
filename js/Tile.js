@@ -9,7 +9,8 @@ Game.Tile = function (myX, myY, myType) {
     my.x = my.posX * Game.gridSize + Game.offsetX;
     my.y = my.posY * Game.gridSize + Game.offsetY;
     //
-    //
+   
+    //******* This no loner works!! UFO is now an object rather than a tile type.
     if (my.type === "ufoExit") {
         Game.door = my;
     }
@@ -69,7 +70,7 @@ Game.MazeTile = function (myX, myY, myType, tRotation, tCanRotate) {
         	if(tCanRotate === "R"){
 			rotate();
 		}
-        },300);
+        },300) 	;
 		
 		
 	};
@@ -107,6 +108,7 @@ Game.MazeTile = function (myX, myY, myType, tRotation, tCanRotate) {
 		return true;
 	};
 	
+
 	return my;
 };
 
