@@ -2,11 +2,12 @@
 //declare an array of levels as a Game property
 /*
 LEGEND
-0 norotate
-1 rotate
-2 cow
-3 ufoExit
-4 hero
+0 hero
+1 cow
+2 UFO
+
+
+
 */
 
 
