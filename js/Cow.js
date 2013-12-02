@@ -6,16 +6,16 @@ Game.Cow = function (myX, myY) {
     	my = new createjs.Bitmap(Game.imgResSrcs["cow"]);
     //
     
-    my.rock = function(){
-    	createjs.Tween.get(my).to({rotation:20}, 200).call(function(){
-    		createjs.Tween.get(my).to({rotation:0}, 200);
-    	});
+    my.shrink = function(){
+    	createjs.Tween.get(my).to({scaleX:0,scaleY:0},300,createjs.Ease.backIn);
     };
     
+    //
     my.setCowPosition = function (newX, newY) {
         var newXpx, newYpx;
         my.posX = newX;
         my.posY = newY;
+        my.isVisable = true;
         //
          // just jump to the correct position
           	my.x = my.posX * Game.gridSize + Game.offsetX + my.regX;
@@ -24,21 +24,27 @@ Game.Cow = function (myX, myY) {
         
         Game.stage.update();
     };
+    
+    //
+    my.iGotPickedUp = function () {
+      my.shrink();
+      my.isVisable = false;
+    };
+    
     //
     my.isAt = function(somewhereX, somewhereY){
-        return my.posX === somewhereX && my.posY === somewhereY;
+        return my.posX === somewhereX && my.posY === somewhereY && my.isVisable;
     };
+    
     //
     my.backToStart = function(){
     	my.moveTo(startX, startY);
     };
+    
     my.setCowPosition(myX, myY);
     return my;
 };
 
-Game.areAllCowsCollected = function(){
-	Game.levelIsWon = true;
-};
 
 Game.addCows = function(){
 	var cowIndex;
@@ -47,23 +53,34 @@ Game.addCows = function(){
     }
 };
 
-Game.cowAt = function (testX, testY){
-	var cowIndex, theCow;
-	for (cowIndex in Game.cows){
-		theCow = Game.cows[cowIndex];
-		if (theCow.isAt(testX, testY)){
-			return theCow;
-		}
+Game.cowCounter = function(){
+	Game.cowsCollected += 1;
+	if (Game.cowsCollected === Game.minimumCows){
+		Game.addUFO();
 	}
 };
 
-Game.hasCow = function(){
-	var cowIndex, theCow;
-	for(cowIndex in Game.cows){
+Game.steppedOnSpaceship = function(){
+	Game.levelIsWon = true;
+};
+
+
+Game.removeCow = function (cow) {
+	cow.iGotPickedUp();
+	Game.cowCounter();
+	window.setTimeout(function(){
+        Game.stage.removeChild(cow);
+        },300);
+	
+};
+
+Game.pickCowUpIfItsThere = function (testX, testY){
+	var cowIndex, 
+		theCow; 
+	for (cowIndex in Game.cows){
 		theCow = Game.cows[cowIndex];
-    	if(theCow.isAt(testX, testY)) {
-    		console.log("there's a cow here");
-    		//Game.boxes[boxIndex].removeChild(Game.Cow);
-    	}
-    }  
+		if (theCow.isAt(testX, testY)){
+			Game.removeCow(theCow);
+		}
+	}
 };

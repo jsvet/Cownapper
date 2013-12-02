@@ -9,11 +9,15 @@
     </head>
     <body>
     	<h1>COWNAPPER</h1>
-    		<h2>Get all the cows</h2>
-    		<button type="button" onClick="window.location.reload();" id="button">Restart Game</button>
-        <div id="game">
-            <canvas id="stage" width="510" height="510">
-            </canvas>
+    	<h2>Cow Abduction Inc.</h2>
+        <div id="game-container">
+        	<div id="status-bar">
+        		<button type="button" onClick="window.location.reload();" id="button">Restart Level</button>
+        	</div>
+	        <div id="canvas-container">
+	            <canvas id="stage" width="510" height="510">
+	            </canvas>
+	        </div>
         </div>
         
         <footer>
@@ -34,7 +38,7 @@
         <script src="js/input.js"></script>
         <script src="js/Tile.js"></script>
         <script src="js/Hero.js"></script>
-        <script src="js/Cows.js"></script>
+        <script src="js/Cow.js"></script>
         <script src="js/ufo.js"></script>
         
       

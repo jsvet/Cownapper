@@ -8,7 +8,7 @@ Game.showNextLevelBtn = function () {
         hitW = txt.getMeasuredWidth() + (border * 2),
         hitH = txt.getMeasuredHeight() + (border * 2),
         hitX,
-        fortune = new createjs.Text("avoid stepping on toes to reach nirvana", "18px Helvetica", "white"),
+        fortune = new createjs.Text("You made it back to the Spaceship!! ", "18px Gorditas", "white"),
         button = new createjs.Container(),
         hitY;
     //

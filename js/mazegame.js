@@ -10,10 +10,11 @@ var Game = {
         "cow" : "img/cow.png",
         "ufoExit" : "img/laserbeam.png",
         "farmer" : "img/farmer.png",
+        "hall" : "img/hall.png",
         "corner" : "img/corner.png"
     },
     // to avoid redundancy, we refer to property identifiers in imgResSrcs here
-    tileSrcs : ["ground", "field", "wall", "hero", "cow", "ufoExit", "farmer"],
+    tileSrcs : ["ground", "field", "wall", "hero", "cow", "ufoExit", "hall", "farmer"],
     tileKeys : {
     	"W" : "wall",
     	"C" : "corner",
@@ -26,7 +27,8 @@ var Game = {
     offsetX : 10,
     offsetY : 10,
     currentLevel : 0,
-    clicks : 0
+    minimumCows : 1,
+    cowsCollected : 0
 };
 
 
@@ -45,11 +47,14 @@ Game.init = function () {
 Game.initModel = function () {
     'use strict';
     var theMap = Game.Grid(Game.levels.getMap()), // make a wrapped grid of tile codes
+        
         tiles = [], // will be used to create a grid object containing all the tiles
+        
         type, tile, tname, tBitmap, tkey, tRotation, tCanRotate;
     //
-    //reset clicks to 0 at the beginning of each level
-    Game.clicks = 0;
+    // get the minimum cows for this level
+    Game.minimumCows = Game.levels.getMinimumCows();
+	Game.cowsCollected = 0;
    	
     Game.cows = [];
     Game.ufos = [];
@@ -61,19 +66,7 @@ Game.initModel = function () {
         if (col >= tiles.length) {
             tiles.push([]); // make a new column
         }
-        //
-        /*
-        if (tileCode === 3) { // special case for hero
-            Game.hero = new Game.Hero(col, row);
-            tileCode = 0;
-        } else if (tileCode === 4) { // special case for cow
-            Game.cows.push( new Game.Cow(col, row ));
-            tileCode = 0;
-        }
-        */
-        /* else if (tileCode === 5) { // special case for ufo
-            tileCode = 0; do this after ufo works like hero and cow
-        } */
+
         
         if (typeof tileCode === "string") {    	
         	tkey = tileCode.charAt(0);
@@ -102,16 +95,16 @@ Game.initModel = function () {
         
         // now make the tile
         tile = new Game.MazeTile(col, row, type, tRotation, tCanRotate);
+        
         // store the tile in our 2d array of tiles and add it to the stage
         tiles[row][col] = tile;
         Game.stage.addChild(tile);
-        //Game.stage.update();
+        
     });
     
     Game.tiles = Game.Grid(tiles); // wrap the tiles array up as a 'grid' object
     // finally, now that all tiles are drawn, add the objects on top
     Game.stage.addChild(Game.hero);
-	Game.addUFO();
     Game.addCows();
     
 };
@@ -126,13 +119,11 @@ Game.update = function () {
         tile.update();
     });
     
-    Game.areAllCowsCollected();
-    
     if (Game.levelIsWon) {
         window.setTimeout(function(){
         	Game.showLevelOver();
         	Game.levelIsWon = false;
-        },500);
+        },100);
         Game.levelIsWon = false;
     }
 };

@@ -5,9 +5,12 @@ html {
 	margin:auto;
 	background-image:url('http://rosalienebacchus.files.wordpress.com/2012/04/planet-earth-from-space.jpg') ;
 }
-#game {
+#canvas-container {
 	width:510px;
 	margin:auto;
+}
+#game-container {
+	width: 510px;
 }
 #stage{
     /*background-color: #006699;*/

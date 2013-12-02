@@ -55,19 +55,14 @@ Game.move = function (dirX, dirY) {
     	return;
     }
     
-    if (tileToTest.hasCow === false){
-   	console.log("tileToTest.hasCow");
-   }
+	//Check if cow is there
+	
+	Game.pickCowUpIfItsThere(testX, testY);
+	Game.ifUFOFlyHome(testX, testY);
 	
 	currentTile.rotateOnLeave();
 
-   
-  /* for(cowIndex in Game.cows){
-    	if(Game.cows[cowIndex].isAt(testX, testY)) {
-    		console.log("there's a cow here");
-    		//Game.boxes[boxIndex].removeChild(Game.Cow);
-    	}
-    }*/
+	
     
     if (tileToTest.tryToStepOn()) {
         Game.hero.moveTo(testX, testY, true);

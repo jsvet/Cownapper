@@ -13,10 +13,13 @@ Game.UFO = function (myX, myY) {
     	});
     };
     
+    
     my.setUFOPosition = function (newX, newY) {
         var newXpx, newYpx;
         my.posX = newX;
         my.posY = newY;
+        // isVisable makes the space where the UFO will land not end the level
+        my.isVisable = false;
         //
          // just jump to the correct position
           	my.x = my.posX * Game.gridSize + Game.offsetX + my.regX;
@@ -25,9 +28,21 @@ Game.UFO = function (myX, myY) {
         
         Game.stage.update();
     };
+    
+    // when UFO lands it will work
+    my.makeUfoActive = function(){
+    	my.isVisable = true;
+    };
+    
+    // when UFO flies away, it will not work
+    my.makeUfoInactive = function(){
+    	my.isVisable = false;
+    };
+    
+    
     //
     my.isAt = function(somewhereX, somewhereY){
-        return my.posX === somewhereX && my.posY === somewhereY;
+        return my.posX === somewhereX && my.posY === somewhereY && my.isVisable;
     };
     //
     my.backToStart = function(){
@@ -40,16 +55,30 @@ Game.UFO = function (myX, myY) {
 Game.addUFO = function(){
 	var ufoIndex;
 	for (ufoIndex in Game.ufos){
-    	Game.stage.addChild(Game.ufos[ufoIndex]);
+		theUfo = Game.ufos[ufoIndex];
+    	Game.stage.addChild(theUfo);
+    	theUfo.makeUfoActive();
     }
 };
 
-Game.ufoAt = function (testX, testY){
+Game.UfoFliesHome = function(){
+	var ufoIndex;
+	for (ufoIndex in Game.ufos){
+		theUfo = Game.ufos[ufoIndex];
+    	Game.stage.removeChild(theUfo);
+    	theUfo.makeUfoInactive();
+    	console.log("ufo flies home");
+    	Game.levelIsWon = true;
+    	Game.update();
+    }
+};
+
+Game.ifUFOFlyHome = function (testX, testY){
 	var ufoIndex, theUFO;
 	for (ufoIndex in Game.ufos){
 		theUFO = Game.ufos[ufoIndex];
 		if (theUFO.isAt(testX, testY)){
-			return theUFO;
+			Game.UfoFliesHome();
 		}
 	}
 };
