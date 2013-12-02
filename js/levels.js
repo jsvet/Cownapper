@@ -13,29 +13,15 @@ LEGEND
 
 Game.levels = [
     {
-        minimumCows : 2,
+        minimumCows : 5,
         grid : [
-        	["C0N","W0N","W0N","W0N","W0N","W0N","W0N","C1N"],
-			["W3N","0"  ,"1"  ,"1"  ,"1"  ,"1"  ,"W2R","C2N"],
-			["W3N","W2R","2"  ,"W2R","W2R","W2R","W2R","C2N"],
-			["W3N","W2R","W3R","W2R","W2R","W2R","W2R","C2N"],
-			["W3N","W2R","W3R","W2R","W2R","W2R","W2R","C2N"],
-			["C3N","W2N","W2N","W2N","W2N","W2N","W2N","C2N"],
+        	["C0N","W0N","W0N","W0N","W0N","W0N","W0N","2"  ],
+			["W3N","0"  ,"W2R","W2R","W2R","1"  ,"W2R","C2N"],
+			["W3N","W2R","W2R","W2R","W2R","W2R","W2R","C2N"],
+			["W3N","W2R","W3R","W2R","W2R","W2R","W2R","1"  ],
+			["W3N","W2R","W3R","W2R","W2R","W2R","W2R","1"  ],
+			["C3N","1"  ,"W2N","W2N","W2N","W2N","W2N","1"  ],
 		]
-    },{
-    	minimumCows : 5,
-    	grid : [
-    		["C0N", "W0N", "1"  , "H0N", "H0N", "H0N", "W0N", "W0N", "W0N", "C1N"],
-			["C3N", "0"  , "W0N", "C1N", "H1N", "W3N", "G0N", "H0N", "1"  , "C2N"],
-			["1"  , "W2N", "C3N", "H1N", "C3N", "F0N", "H0N", "H0N", "1"  , "C1N"],
-			["C3N", "W2N", "H0N", "W1N", "W3N", "C2N", "C0N", "W0N", "W0N", "W1N"],
-			["W0N", "1"  , "W2N", "W1N", "W3N", "C2N", "H1N", "W2N", "C1N", "W1N"],
-			["C0N", "W3N", "G0N", "W1N", "W3N", "H0N", "1"	, "C1N", "H1N", "W1N"],
-			["W3N", "H0N", "C1N", "H1N", "W0N", "1"  , "C2N", "W3N", "H1N", "1"  ],
-			["H1N", "W1N", "W2N", "C2N", "G0N", "C0N", "W2N", "W3N", "C3N", "W1N"],
-			["W3N", "C3N", "C1N", "C3N", "G0N", "W3N", "C2N", "C3N", "C1N", "H1N"],
-			["1"  , "W2N", "C2N", "C3N", "G0N", "G0N", "G0N", "W0N", "2"  , "C2N"]
-    	]
     },
     {
     	minimumCows : 5,
@@ -53,16 +39,20 @@ Game.levels = [
     	]
    },
    {
-        minimumCows : 2,
-        grid : [
-			["C0N","W0N","W0N","W0N","W0N","W0N","W0N","C1N"],
-			["W3N","0"  ,"1"  ,"1"  ,"2"  ,"W2R","W2R","C2N"],
-			["W3N","W2R","W2R","W2R","W2R","W2R","W2R","C2N"],
-			["W3N","W2R","W3R","W2R","W2R","W2R","W2R","C2N"],
-			["W3N","W2R","W3R","W2R","W2R","W2R","W2R","C2N"],
-			["C3N","W2N","W2N","W2N","W2N","W2N","W2N","C2N"],
-		]
-    }
+    	minimumCows : 7,
+    	grid : [
+    		["C0R", "W0R", "1"  , "H0R", "C1R", "C0R", "W0R", "W0R", "W0R", "C1R"],
+			["C3R", "W2R", "W0R", "C1R", "H1R", "W3R", "0"  , "H0R", "1"  , "C2R"],
+			["1"  , "W2R", "C3R", "H1R", "C3R", "G0N", "H0R", "H0R", "1"  , "C1R"],
+			["C3R", "W2R", "H0R", "W1R", "W3R", "C2R", "C0R", "W0R", "W0R", "W1R"],
+			["W0R", "1"  , "W2R", "W1R", "W3R", "C2R", "H1R", "W2R", "C1R", "W1R"],
+			["C0R", "W3R", "G0N", "W1R", "W3R", "H0R", "1"	, "C1R", "H1R", "W1R"],
+			["W3R", "H0R", "C1R", "H1R", "W0R", "1"  , "C2R", "W3R", "H1R", "1"  ],
+			["H1R", "W1R", "W2R", "C2R", "G0N", "C0R", "W2R", "W3R", "C3R", "W1R"],
+			["W3R", "C3R", "C1R", "C3R", "G0N", "W3R", "C2R", "C3R", "C1R", "H1R"],
+			["1"  , "W2R", "C2R", "C3R", "G0N", "G0N", "2"  , "W0R", "C2R"  , "C2R"]
+    	]
+   }
 ];
 // return the current map of tile codes, unless another level index is specified
 Game.levels.getMap = function (lev) {
