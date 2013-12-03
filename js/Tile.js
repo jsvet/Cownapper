@@ -48,8 +48,7 @@ Game.MazeTile = function (myX, myY, myType, tRotation, tCanRotate) {
 			"ground" : [0,0,0,0]
 		}[myType],
 		i, 
-		wallCode, 
-		rot = 0;
+		wallCode;
 	
 	my.regX = Game.gridSize / 2;
 	my.regY = Game.gridSize / 2;
@@ -69,6 +68,8 @@ Game.MazeTile = function (myX, myY, myType, tRotation, tCanRotate) {
 		window.setTimeout(function(){
         	if(tCanRotate === "R"){
 			rotate();
+			createjs.Sound.play("tile");
+			console.log("tile sound");
 		}
         },300) 	;
 		

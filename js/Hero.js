@@ -60,6 +60,8 @@ Game.move = function (dirX, dirY) {
 	Game.pickCowUpIfItsThere(testX, testY);
 	Game.ifUFOFlyHome(testX, testY);
 	
+	createjs.Sound.play("alien");
+	
 	currentTile.rotateOnLeave();
 
 	

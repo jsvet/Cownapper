@@ -58,6 +58,7 @@ Game.addUFO = function(){
 		theUfo = Game.ufos[ufoIndex];
     	Game.stage.addChild(theUfo);
     	theUfo.makeUfoActive();
+    	createjs.Sound.play("ufo");
     }
 };
 
@@ -67,7 +68,7 @@ Game.UfoFliesHome = function(){
 		theUfo = Game.ufos[ufoIndex];
     	Game.stage.removeChild(theUfo);
     	theUfo.makeUfoInactive();
-    	console.log("ufo flies home");
+    	createjs.Sound.play("ufo");
     	Game.levelIsWon = true;
     	Game.update();
     }

@@ -11,6 +11,7 @@ var Game = {
         "ufoExit" : "img/laserbeam.png",
         "farmer" : "img/farmer.png",
         "hall" : "img/hall.png",
+        "darkCrop" : "img/arrow.png",
         "corner" : "img/corner.png"
     },
     // to avoid redundancy, we refer to property identifiers in imgResSrcs here
@@ -28,7 +29,13 @@ var Game = {
     offsetY : 10,
     currentLevel : 0,
     minimumCows : 1,
-    cowsCollected : 0
+    cowsCollected : 0,
+    
+    // music
+    cow : createjs.Sound.registerSound("sound/cow.ogg", "cow", 1),
+    ufo : createjs.Sound.registerSound("sound/ufo.wav", "ufo", 1),
+    alien : createjs.Sound.registerSound("sound/alien.ogg", "alien", 1),
+    tile : createjs.Sound.registerSound("sound/tile.ogg", "tile", 1)
 };
 
 
@@ -50,12 +57,13 @@ Game.initModel = function () {
         
         tiles = [], // will be used to create a grid object containing all the tiles
         
-        type, tile, tname, tBitmap, tkey, tRotation, tCanRotate;
+        type, tile, tname, tBitmap, tkey, rkey, tRotation, tCanRotate;
     //
     // get the minimum cows for this level
     Game.minimumCows = Game.levels.getMinimumCows();
 	Game.cowsCollected = 0;
    	
+   	Game.darkCrops = [];
     Game.cows = [];
     Game.ufos = [];
         
@@ -81,6 +89,11 @@ Game.initModel = function () {
         		tkey = "G";
         	}
         	
+        	rkey = tileCode.charAt(2);
+        	if (rkey === "R"){ // rotatable
+        		Game.darkCrops.push(new Game.darkCrop(col,row));
+        	}
+        	
         	tname = Game.tileKeys[tkey];
         	type = tname; //Game.imgResSrcs[tname];
         	
@@ -104,6 +117,7 @@ Game.initModel = function () {
     
     Game.tiles = Game.Grid(tiles); // wrap the tiles array up as a 'grid' object
     // finally, now that all tiles are drawn, add the objects on top
+    Game.addDarkCrops();
     Game.stage.addChild(Game.hero);
     Game.addCows();
     

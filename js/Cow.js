@@ -81,6 +81,7 @@ Game.pickCowUpIfItsThere = function (testX, testY){
 		theCow = Game.cows[cowIndex];
 		if (theCow.isAt(testX, testY)){
 			Game.removeCow(theCow);
+			createjs.Sound.play("cow");
 		}
 	}
 };
