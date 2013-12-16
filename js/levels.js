@@ -24,7 +24,7 @@ Game.levels = [
 		]
     },
     {
-    	minimumCows : 5,
+    	minimumCows : 8,
     	grid : [
     		["F0N", "F0N", "C0R", "H0R", "W0N", "W0N", "H0R", "H0R", "H0R", "C1R"],
             ["W3N", "G0N", "0"  , "F0N", "1"  , "G0N", "C0R", "1"  , "1"  , "H1R"],
@@ -39,7 +39,7 @@ Game.levels = [
     	]
    },
    {
-    	minimumCows : 7,
+    	minimumCows : 9,
     	grid : [
     		["C0R", "W0R", "1"  , "H0R", "C1R", "C0R", "W0R", "W0R", "W0R", "C1R"],
 			["C3R", "W2R", "W0R", "C1R", "H1R", "W3R", "0"  , "H0R", "1"  , "C2R"],

@@ -44,8 +44,9 @@ var Game = {
 Game.init = function () {
     'use strict';
     createjs.Ticker.addEventListener("tick", Game.stage);
-    Game.initModel();
+    //Game.initModel();
     Game.setupInput();
+	Game.showStartScreen();
 };
 
 
@@ -169,3 +170,6 @@ Game.preloadAssets = function (runImmediatelyAfterwards) {
 //
 //
 Game.preloadAssets(true); // we start here
+
+
+
